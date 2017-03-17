@@ -1,7 +1,7 @@
 package ru.nevars.mcls.algorithms.sort;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.Spliterator;
 
 public abstract class AbstractSort<T extends Comparable<T>> {
 
@@ -37,7 +37,7 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     public boolean isArraySorted() {
-
+        return Arrays.stream(array).spliterator().hasCharacteristics(Spliterator.SORTED);
     }
 
     public abstract void sort();
