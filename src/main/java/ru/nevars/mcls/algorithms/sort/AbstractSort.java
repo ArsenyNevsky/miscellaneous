@@ -1,8 +1,5 @@
 package ru.nevars.mcls.algorithms.sort;
 
-import java.util.Arrays;
-import java.util.Spliterator;
-
 public abstract class AbstractSort<T extends Comparable<T>> {
 
     protected T[] array;
@@ -25,7 +22,11 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     protected boolean isAlessB(int i, int j) {
-        return array[i].compareTo(array[j]) == -1;
+        return array[i].compareTo(array[j]) == -1 || array[i].compareTo(array[j]) == 0;
+    }
+
+    protected boolean isAlessB(T a, T b) {
+        return a.compareTo(b) == -1 || a.compareTo(b) == 0;
     }
 
     public T[] getArray() {
@@ -37,7 +38,20 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     public boolean isArraySorted() {
-        return Arrays.stream(array).spliterator().hasCharacteristics(Spliterator.SORTED);
+        if (array == null) {
+            throw new NullPointerException("Array must not be null");
+        }
+
+        if (array.length == 1) {
+            return true;
+        }
+
+        for (int i = 1; i <= array.length - 1; i++) {
+            if (!isAlessB(i - 1, i)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public abstract void sort();

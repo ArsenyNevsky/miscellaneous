@@ -11,6 +11,12 @@ public class AbstractSortTest {
     private AbstractSort<String> stringSort;
     private AbstractSort<Double> doubleSort;
 
+    private Integer[] array_1 = {1};
+    private Integer[] array_2 = {1, 2, 3};
+    private Integer[] array_3 = {0, 0, 0};
+    private Integer[] array_4 = {3, 2, 1, 0};
+    private Integer[] array_5 = {3, 4, 2, 1, 0};
+
     @Before
     public void setUp() throws Exception {
         integerSort = new AbstractSort<Integer>(new Integer[]{new Integer(2), new Integer(3), new Integer(1)}) {
@@ -51,6 +57,24 @@ public class AbstractSortTest {
 
             }
         };
+    }
+
+    @Test
+    public void testIsSortedArray() throws Exception {
+        integerSort.setArray(array_1);
+        assertTrue(integerSort.isArraySorted());
+
+        integerSort.setArray(array_2);
+        assertTrue(integerSort.isArraySorted());
+
+        integerSort.setArray(array_3);
+        assertTrue(integerSort.isArraySorted());
+
+        integerSort.setArray(array_4);
+        assertFalse(integerSort.isArraySorted());
+
+        integerSort.setArray(array_5);
+        assertFalse(integerSort.isArraySorted());
     }
 
 }
