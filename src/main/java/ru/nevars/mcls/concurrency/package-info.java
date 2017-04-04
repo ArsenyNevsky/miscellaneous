@@ -1,1 +1,0 @@
-package ru.nevars.mcls.concurrency;

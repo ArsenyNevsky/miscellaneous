@@ -4,15 +4,15 @@ public abstract class AbstractSort<T extends Comparable<T>> {
 
     protected T[] array;
 
-    protected final int ARRAY_SIZE;
+    protected int ARRAY_SIZE;
+
+    public AbstractSort() {
+        array = null;
+        ARRAY_SIZE = 0;
+    }
 
     public AbstractSort(T[] array) {
-        if (array == null) {
-            throw new NullPointerException("Array must not be null");
-        }
-
-        this.array = array;
-        ARRAY_SIZE = array.length;
+        setArray(array);
     }
 
     protected void swap(int i, int j) {
@@ -34,12 +34,17 @@ public abstract class AbstractSort<T extends Comparable<T>> {
     }
 
     public void setArray(T[] array) {
+        if (array == null) {
+            throw new NullPointerException("Array must not be null");
+        }
+
         this.array = array;
+        ARRAY_SIZE = array.length;
     }
 
     public boolean isArraySorted() {
-        if (array == null) {
-            throw new NullPointerException("Array must not be null");
+        if (array.length == 0) {
+            return true;
         }
 
         if (array.length == 1) {
@@ -51,8 +56,21 @@ public abstract class AbstractSort<T extends Comparable<T>> {
                 return false;
             }
         }
+
         return true;
     }
 
-    public abstract void sort();
+    public void sort() {
+        if (array == null) {
+            throw new NullPointerException("Array must not be null");
+        }
+
+        if (array.length == 1) {
+            return;
+        }
+
+        sortArray();
+    }
+
+    protected abstract void sortArray();
 }

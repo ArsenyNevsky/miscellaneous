@@ -3,25 +3,20 @@ package ru.nevars.mcls.algorithms.sort;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-public class AbstractSortTest {
+public class AbstractSortTest extends ArraysTest {
 
-    private AbstractSort<Integer> integerSort;
-    private AbstractSort<String> stringSort;
-    private AbstractSort<Double> doubleSort;
-
-    private Integer[] array_1 = {1};
-    private Integer[] array_2 = {1, 2, 3};
-    private Integer[] array_3 = {0, 0, 0};
-    private Integer[] array_4 = {3, 2, 1, 0};
-    private Integer[] array_5 = {3, 4, 2, 1, 0};
+    protected AbstractSort<Integer> integerSort;
+    protected AbstractSort<String> stringSort;
+    protected AbstractSort<Double> doubleSort;
 
     @Before
     public void setUp() throws Exception {
-        integerSort = new AbstractSort<Integer>(new Integer[]{new Integer(2), new Integer(3), new Integer(1)}) {
+        integerSort = new AbstractSort<Integer>() {
             @Override
-            public void sort() {
+            public void sortArray() {
 
             }
         };
@@ -29,7 +24,7 @@ public class AbstractSortTest {
 
     @Test
     public void swap() throws Exception {
-        Integer[] array = {new Integer(2), new Integer(1)};
+        Integer[] array = {2, 1};
         integerSort.setArray(array);
         integerSort.swap(0, 1);
         assertTrue(integerSort.getArray()[0] == 1);
@@ -38,22 +33,17 @@ public class AbstractSortTest {
 
     @Test
     public void isAlessB() throws Exception {
+        integerSort.setArray(integerArray_5);
         assertTrue(integerSort.isAlessB(2, 1));
-        assertTrue(integerSort.isAlessB(0, 1));
-        assertFalse(integerSort.isAlessB(1, 0));
-    }
-
-    @Test
-    public void getArray() throws Exception {
-        Integer[] array = integerSort.getArray();
-        assertArrayEquals(integerSort.getArray(), array);
+        assertTrue(integerSort.isAlessB(1, 0));
+        assertFalse(integerSort.isAlessB(0, 1));
     }
 
     @Test(expected = NullPointerException.class)
     public void testNullArray() throws Exception {
         integerSort = new AbstractSort<Integer>(null) {
             @Override
-            public void sort() {
+            public void sortArray() {
 
             }
         };
@@ -61,19 +51,19 @@ public class AbstractSortTest {
 
     @Test
     public void testIsSortedArray() throws Exception {
-        integerSort.setArray(array_1);
+        integerSort.setArray(integerArray_2);
         assertTrue(integerSort.isArraySorted());
 
-        integerSort.setArray(array_2);
+        integerSort.setArray(integerArray_3);
         assertTrue(integerSort.isArraySorted());
 
-        integerSort.setArray(array_3);
+        integerSort.setArray(integerArray_4);
         assertTrue(integerSort.isArraySorted());
 
-        integerSort.setArray(array_4);
+        integerSort.setArray(integerArray_5);
         assertFalse(integerSort.isArraySorted());
 
-        integerSort.setArray(array_5);
+        integerSort.setArray(integerArray_6);
         assertFalse(integerSort.isArraySorted());
     }
 
