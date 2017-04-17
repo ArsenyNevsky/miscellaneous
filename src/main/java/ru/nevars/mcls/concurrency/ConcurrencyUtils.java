@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class ConcurrencyUtils {
+public final class ConcurrencyUtils {
 
     private long startTime = 0L;
     private long endTime = 0L;
@@ -42,7 +42,9 @@ public class ConcurrencyUtils {
         return concurrencyUtils;
     }
 
-
+    public boolean checkTimeEstimations(long timeAssesmentOne, long timeAssesmentTwo) {
+        return timeAssesmentOne > timeAssesmentTwo;
+    }
 
     public void startTimeEvaluation() {
         startTime = System.nanoTime();
@@ -54,6 +56,10 @@ public class ConcurrencyUtils {
 
     public long getWorkTimeSeconds() {
         return (endTime - startTime) / ONE_SECOND;
+    }
+
+    public long getWorkTimeMillseconds() {
+        return endTime - startTime;
     }
 
 
