@@ -13,6 +13,10 @@ public final class TrigonometricFunction {
         IntStream.range(0, N).forEach(i -> values[i] = sin(i));
     }
 
+    public static double[] getValues() {
+        return values;
+    }
+
     public static void flusValues() {
         values = null;
     }

@@ -47,11 +47,11 @@ public final class ConcurrencyUtils {
     }
 
     public void startTimeEvaluation() {
-        startTime = System.nanoTime();
+        startTime = System.currentTimeMillis();
     }
 
     public void endTimeEvaluation() {
-        endTime = System.nanoTime();
+        endTime = System.currentTimeMillis();
     }
 
     public long getWorkTimeSeconds() {
@@ -62,10 +62,15 @@ public final class ConcurrencyUtils {
         return endTime - startTime;
     }
 
+    public void printWorkTimeMillseconds() {
+        System.out.println("startTime = " + startTime);
+        System.out.println("endTime = " + endTime);
+        System.out.printf("%.2f mls", (double) ((endTime - startTime) / (1 * 1)));
+    }
 
     public void printWorkTimeSeconds() {
         if (startTime != DEFAULT_VALUE && endTime != DEFAULT_VALUE) {
-            System.out.printf("%.2f sec", (endTime - startTime) / ONE_MINUTE);
+            System.out.printf("%.2f sec", (double) ((endTime - startTime) / ONE_MINUTE));
             return;
         }
         if (startTime == DEFAULT_VALUE && endTime == DEFAULT_VALUE) {
@@ -77,6 +82,14 @@ public final class ConcurrencyUtils {
         if (endTime == DEFAULT_VALUE) {
             System.out.println("Stop time evaluation");
         }
+    }
+
+    public void startTimeEstimation() {
+        startTime = System.currentTimeMillis();
+    }
+
+    public void endTimeEstimation() {
+        endTime = System.currentTimeMillis();
     }
 
     public void resetTimeParameters() {
